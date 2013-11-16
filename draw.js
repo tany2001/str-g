@@ -1,6 +1,6 @@
 function draw()
 {
-	var defaultTrrSize = 6;
+	var defaultTrrSize = 2;
 
 	for(var i = 0;i < map.size.x;i ++)
 	{
@@ -8,8 +8,13 @@ function draw()
 		{
 			if(map.value[i][j] == 1)
 			{
-				context.fillRect(i * defaultTrrSize, j * defaultTrrSize, defaultTrrSize, defaultTrrSize);
+				context.fillStyle = "green";
 			}
+			else
+			{
+				context.fillStyle = "blue";
+			}
+			context.fillRect(i * defaultTrrSize, j * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 		}
 	}
 	requestAnimationFrame(draw);
