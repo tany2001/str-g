@@ -1,4 +1,4 @@
-function ch(var a)
+function ch(a)
 {
 	var n = Math.random() * a;
 	if(n < a)
