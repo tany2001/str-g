@@ -36,10 +36,12 @@ function Vector(x,y){
 	this.y=y;
 };
 
-var Map = {
+var map = {
+	
 	size:new Vector ( 100 , 100 ) ;
 	value:create2dArray( size.x, size.y, 0);
 	unit:create2dArray( size.x, size.y, 0);
+
 };
 
 function  Unit (type) {
