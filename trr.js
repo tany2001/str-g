@@ -1,6 +1,6 @@
 function ch(a)
 {
-	var n = Math.random() * a;
+	var n = Math.random() * 100;
 	if(n < a)
 	{
 		return true;
@@ -19,20 +19,25 @@ function generateTerrain()
 
 	while(any)
 	{
-		var c = next[0];
-		map[c.x][c.y] = 1;
+		var c = next[0]; next.remove(0);
+
+		map.value[c.x][c.y] = 1;
+		any = false;
 
 		for(var i = 0;i < moveX.length;i ++)
 		{
-			if(c.x + moveX[i] >= 0 && c.x + moveX[i] < map.size.x && c.y + moveY[i] >= 0 && c.y + moveY[i] < map.size.y)
+			if(c.x + moveX[i] >= 0 && c.x + moveX[i] < map.size.x && c.y + moveY[i] >= 0 && c.y + moveY[i] < map.size.y && map.value[c.x + moveX[i]][c.y + moveY[i]] == 0)
 			{
 				if(ch(chance))
 				{
+					any = true;
 					next.push(new Vector(c.x + moveX[i], c.y + moveY[i]));
 				}
 			}
 		}
 
-		chance -= 2;
+		chance -= 0.1;
 	}
 }
+
+generateTerrain();
