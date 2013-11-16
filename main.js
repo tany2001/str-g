@@ -8,6 +8,7 @@ function create2dArray(sizeX,sizeY,value){
 			array[y][x] = value;
 		}
 	}
+	return array;
 }
 
 unitStats["worker"] = new Stat(10, 1, 5, 0 , "a.png" , 1 , 1);
@@ -36,13 +37,15 @@ function Vector(x,y){
 	this.y=y;
 };
 
-var map = {
+function Map(){
 	
-	size: new Vector ( 100 , 100 ) ,
-	value:create2dArray( size.x, size.y, 0),
-	unit:create2dArray( size.x, size.y, 0)
+	this.size = new Vector ( 100 , 100 ) ,
+	this.value = create2dArray( this.size.x, this.size.y, 0),
+	this.unit = create2dArray( this.size.x, this.size.y, 0)
 
-};
+}
+
+var map = new Map();
 
 function  Unit (type) {
 	
