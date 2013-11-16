@@ -38,14 +38,14 @@ function Vector(x,y){
 
 var map = {
 	
-	size:new Vector ( 100 , 100 ) ;
-	value:create2dArray( size.x, size.y, 0);
-	unit:create2dArray( size.x, size.y, 0);
+	size: new Vector ( 100 , 100 ) ,
+	value:create2dArray( size.x, size.y, 0),
+	unit:create2dArray( size.x, size.y, 0)
 
 };
 
 function  Unit (type) {
 	
-	this = unitStats[type];
+	this = unitStats[type]
 	
 };
