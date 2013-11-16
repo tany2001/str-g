@@ -10,15 +10,15 @@ function create2dArray(sizeX,sizeY,value){
 	}
 }
 
-unitStats["worker"] = new Stat(10, 1, 5, 0 ,/*img*/ , 1 , 1);
+unitStats["worker"] = new Stat(10, 1, 5, 0 , "a.png" , 1 , 1);
 
-unitStats["soldier"] = new Stat(20, 2, 5 ,0 , /*img*/, 1 , 1)
+unitStats["soldier"] = new Stat(20, 2, 5 ,0 , "a.png" , 1 , 1)
 
-unitStats["small_ship"] = new Stat(50, 2, 8 , 10,/*img*/ , 1 , 1);
+unitStats["small_ship"] = new Stat(50, 2, 8 , 10, "a.png" , 1 , 1);
 
-unitStats["big_ship"] = new Stat(50, 2, 5 , 20 ,/*img*/ , 1 , 1);
+unitStats["big_ship"] = new Stat(50, 2, 5 , 20 , "a.png" , 1 , 1);
 
-unitStats["main_building"] = new Stat(100 , 0 , 0 , 5 , /*img*/ , 2 , 2);
+unitStats["main_building"] = new Stat(100 , 0 , 0 , 5 , "a.png" , 2 , 2);
 
 function Stat(hp, damage, speed, cappacity, image , sizeX, sizeY){
 
