@@ -20,10 +20,4 @@ function update()
     setTimeout(update, 10);
 }
 
-function draw()
-{    
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    requestAnimationFrame(draw);
-}
 update();
-draw();

@@ -1,12 +1,18 @@
-var defaultTrrSize = 5;
-
-for(var i = 0;i < map.size.x;i ++)
+function draw()
 {
-	for(var j = 0;j < map.size.y;j ++)
+	var defaultTrrSize = 5;
+
+	for(var i = 0;i < map.size.x;i ++)
 	{
-		if(map.value[i][j] == 0)
+		for(var j = 0;j < map.size.y;j ++)
 		{
-			context.fillRect(i * defaultTrrSize, j * defaultTrrSize, defaultTrrSize, defaultTrrSize);
+			if(map.value[i][j] == 0)
+			{
+				context.fillRect(i * defaultTrrSize, j * defaultTrrSize, defaultTrrSize, defaultTrrSize);
+			}
 		}
 	}
+	requestAnimationFrame(draw);
 }
+
+draw();
