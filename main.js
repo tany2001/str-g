@@ -1,4 +1,7 @@
-var unitStats=[],building;
+var unitStats=[], terrainImage=[];
+
+terrainImage[0]=new Image();
+terrainImage[0].src="a.png";
 
 function create2dArray(sizeX,sizeY,value){
 	var x,y,array=[];
