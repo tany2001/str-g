@@ -8,6 +8,7 @@ function draw()
 	{
 		for(var j = sy;j < sy + drawView;j ++)
 		{
+			/*
 			if(map.value[i][j] == 1)
 			{
 				context.fillStyle = "green";
@@ -17,7 +18,10 @@ function draw()
 				context.fillStyle = "blue";
 			}
 			context.fillRect((i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
+			*/
+			context.drawImage(terrainImage[map.value[i][j]],(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 		}
+		
 	}
 
 	requestAnimationFrame(draw);
