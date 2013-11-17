@@ -1,6 +1,12 @@
+var canvas = document.getElementById("canvas-id");
+canvas.width = 800;
+canvas.height = 600;
+var context = canvas.getContext("2d");
+
 function draw()
 {
-	var defaultTrrSize = 2;
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	var defaultTrrSize = 1;
 
 	for(var i = 0;i < map.size.x;i ++)
 	{
@@ -18,6 +24,7 @@ function draw()
 		}
 	}
 	requestAnimationFrame(draw);
+	context.strokeRect(0, 0, canvas.width, canvas.height);
 }
 
 draw();

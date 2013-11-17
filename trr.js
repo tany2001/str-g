@@ -9,13 +9,13 @@ function chance(a)
 }
 
 
-function generateMap()
+function generateMap(sx, sy, sch, mch, type)
 {
-	var next = [], ch = 100;
+	var next = [], ch = sch;
 	var used = create2dArray(map.size.x, map.size.y, false);
 
-	next.push(new Vector(map.size.x / 2, map.size.y / 2));
-	used[map.size.x / 2][map.size.y / 2] = true;
+	next.push(new Vector(sx, sy));
+	used[sx][sy] = true;
 
 	var moveX = [0, 0, -1, 1];
 	var moveY = [1, -1, 0, 0];
@@ -24,7 +24,7 @@ function generateMap()
 	{
 		var c = next[0];
 		next.remove(0);
-		map.value[c.x][c.y] = 1;
+		map.value[c.x][c.y] = type;
 
 		for(var a = 0;a < moveX.length;a ++)
 		{
@@ -35,11 +35,27 @@ function generateMap()
 				{
 					used[n.x][n.y] = true;
 					next.push(new Vector(n.x, n.y));
-					ch -= 0.01;
+					ch -= mch;
 				}
 			}
 		}
 	}
 }
 
-generateMap();
+for(var i = 0;i < 19;i ++)
+{
+	var sx = Math.floor(Math.random() * map.size.x);
+	var sy = Math.floor(Math.random() * map.size.y);
+	generateMap(sx, sy, 100, 0.005, 1);	
+}
+
+for(var i = 0;i < 18;i ++)
+{
+	var sx = Math.floor(Math.random() * map.size.x);
+	var sy = Math.floor(Math.random() * map.size.y);
+	generateMap(sx, sy, 100, 0.02, 0);	
+}
+
+
+
+

@@ -42,7 +42,7 @@ function Vector(x,y){
 
 function Map(){
 	
-	this.size = new Vector ( 100 , 100 ) ,
+	this.size = new Vector (600, 600),
 	this.value = create2dArray( this.size.x, this.size.y, 0),
 	this.unit = create2dArray( this.size.x, this.size.y, 0)
 
