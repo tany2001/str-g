@@ -55,3 +55,14 @@ for(var i = 0;i < 18;i ++)
 	var sy = Math.floor(Math.random() * map.size.y);
 	generateMap(sx, sy, 100, 0.02, 0);	
 }
+
+for(var i = 0;i < map.size.x;i ++)
+{
+	for(var j = 0;j < map.size.y;j ++)
+	{
+		if(map.value[i][j] == 1 && chance(0.1))
+		{
+			generateMap(i, j, 100, 2, 2);
+		}
+	}
+}
