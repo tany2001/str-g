@@ -93,3 +93,5 @@ function checkKeyUp(e)
     pressedKey[keyID] = false;
     e.preventDefault();
 }
+
+var drawView = 60;

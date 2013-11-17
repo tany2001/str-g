@@ -4,9 +4,9 @@ function draw()
 
 	var sx = players[currentPlayer].cam.x, sy = players[currentPlayer].cam.y;
 
-	for(var i = sx;i < sx + 60;i ++)
+	for(var i = sx;i < sx + drawView;i ++)
 	{
-		for(var j = sy;j < sy + 60;j ++)
+		for(var j = sy;j < sy + drawView;j ++)
 		{
 			if(map.value[i][j] == 1)
 			{
