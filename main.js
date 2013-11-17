@@ -1,3 +1,8 @@
+var canvas = document.getElementById("canvas-id");
+canvas.width = 800;
+canvas.height = 600;
+var context = canvas.getContext("2d");
+
 var unitStats=[], terrainImage=[];
 
 terrainImage[0]=new Image();
