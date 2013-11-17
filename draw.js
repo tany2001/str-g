@@ -1,3 +1,8 @@
+var colors = [];
+colors[0] = "blue";
+colors[1] = "green";
+colors[2] = "brown";
+
 function draw()
 {
 	var defaultTrrSize = 10;
@@ -8,17 +13,6 @@ function draw()
 	{
 		for(var j = sy;j < sy + drawView;j ++)
 		{
-			/*
-			if(map.value[i][j] == 1)
-			{
-				context.fillStyle = "green";
-			}
-			else
-			{
-				context.fillStyle = "blue";
-			}
-			context.fillRect((i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
-			*/
 			context.drawImage(terrainImage[map.value[i][j]],(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 		}
 		
@@ -27,6 +21,7 @@ function draw()
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 }
+
 drawUI();
 
 function drawUI()
@@ -38,14 +33,7 @@ function drawUI()
 	{
 		for(var j = 0;j < map.size.y;j ++)
 		{
-			if(map.value[i][j] == 1)
-			{
-				context.fillStyle = "green";
-			}
-			else
-			{
-				context.fillStyle = "blue";
-			}
+			context.fillStyle = colors[map.value[i][j]];
 			context.fillRect(i * defaultTrrSize + canvas.width - 200, j * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 		}
 	}
