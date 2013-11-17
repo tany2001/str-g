@@ -67,3 +67,29 @@ Array.prototype.remove = function(from, to)
   this.length = from < 0 ? this.length + from : from;
   return this.push.apply(this, rest);
 };
+
+function Player()
+{
+	this.cam = new Vector(0, 0);
+}
+
+var currentPlayer = 0;
+var players = [];
+
+players.push(new Player());
+
+var pressedKey = [];
+document.addEventListener('keydown', checkKeyDown, false);
+document.addEventListener('keyup', checkKeyUp, false);
+function checkKeyDown(e)
+{
+    var keyID = e.keyCode || e.which;
+    pressedKey[keyID] = true;
+    e.preventDefault();
+}
+function checkKeyUp(e)
+{
+    var keyID = e.keyCode || e.which;
+    pressedKey[keyID] = false;
+    e.preventDefault();
+}

@@ -1,12 +1,12 @@
 function draw()
 {
-	context.clearRect(0, 0, canvas.width, canvas.height);
-
 	var defaultTrrSize = 10;
 
-	for(var i = 0;i < map.size.x;i ++)
+	var sx = players[currentPlayer].cam.x, sy = players[currentPlayer].cam.y;
+
+	for(var i = sx;i < sx + 60;i ++)
 	{
-		for(var j = 0;j < map.size.y;j ++)
+		for(var j = sy;j < sy + 60;j ++)
 		{
 			if(map.value[i][j] == 1)
 			{
@@ -16,15 +16,14 @@ function draw()
 			{
 				context.fillStyle = "blue";
 			}
-			context.fillRect(i * defaultTrrSize, j * defaultTrrSize, defaultTrrSize, defaultTrrSize);
+			context.fillRect((i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 		}
 	}
-
-	drawUI();
 
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 }
+drawUI();
 
 function drawUI()
 {

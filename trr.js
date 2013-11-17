@@ -55,7 +55,3 @@ for(var i = 0;i < 18;i ++)
 	var sy = Math.floor(Math.random() * map.size.y);
 	generateMap(sx, sy, 100, 0.02, 0);	
 }
-
-
-
-
