@@ -11,6 +11,9 @@ terrainImage[0].src="water.png";
 terrainImage[1]=new Image();
 terrainImage[1].src="dirt.png";
 
+terrainImage[2]=new Image();
+terrainImage[2].src="rock.png";
+
 function create2dArray(sizeX,sizeY,value){
 	var x,y,array=[];
 	for (y=0;y<sizeY;y++){
