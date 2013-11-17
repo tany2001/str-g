@@ -42,7 +42,7 @@ function generateMap(sx, sy, sch, mch, type)
 	}
 }
 
-for(var i = 0;i < 19;i ++)
+for(var i = 0;i < 30;i ++)
 {
 	var sx = Math.floor(Math.random() * map.size.x);
 	var sy = Math.floor(Math.random() * map.size.y);
