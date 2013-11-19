@@ -62,7 +62,14 @@ for(var i = 0;i < map.size.x;i ++)
 	{
 		if(map.value[i][j] == 1 && chance(0.1))
 		{
-			generateMap(i, j, 100, 2, 2);
+			if(chance(15))
+			{
+				generateMap(i, j, 100, 3, 3);
+			}
+			else
+			{
+				generateMap(i, j, 100, 2, 2);	
+			}
 		}
 	}
 }

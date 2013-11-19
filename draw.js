@@ -2,6 +2,7 @@ var colors = [];
 colors[0] = "blue";
 colors[1] = "green";
 colors[2] = "brown";
+colors[3] = "yellow";
 
 function draw()
 {
@@ -26,15 +27,15 @@ drawUI();
 
 function drawUI()
 {
-	context.fillStyle = "black";
+	context.fillStyle = "black"; var multy = 2;
 	var defaultTrrSize = 200 / map.size.x; context.fillRect(canvas.width - 200, 0, 200, canvas.height);
 
-	for(var i = 0;i < map.size.x;i ++)
+	for(var i = 0;i < map.size.x;i += multy)
 	{
-		for(var j = 0;j < map.size.y;j ++)
+		for(var j = 0;j < map.size.y;j += multy)
 		{
 			context.fillStyle = colors[map.value[i][j]];
-			context.fillRect(i * defaultTrrSize + canvas.width - 200, j * defaultTrrSize, defaultTrrSize, defaultTrrSize);
+			context.fillRect(i * defaultTrrSize + canvas.width - 200, j * defaultTrrSize, defaultTrrSize * multy, defaultTrrSize * multy);
 		}
 	}
 }

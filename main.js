@@ -5,14 +5,16 @@ var context = canvas.getContext("2d");
 
 var unitStats=[], terrainImage=[];
 
-terrainImage[0]=new Image();
-terrainImage[0].src="terrain/0.png";
+//0 - water
+//1 - dirt
+//2 - rock
+//3 - gold
 
-terrainImage[1]=new Image();
-terrainImage[1].src="terrain/1.png";
-
-terrainImage[2]=new Image();
-terrainImage[2].src="terrain/2.png";
+for(var i = 0;i < 4;i ++)
+{		
+	terrainImage[i]=new Image();
+	terrainImage[i].src="terrain/" + i + ".png";	
+}
 
 function create2dArray(sizeX,sizeY,value){
 	var x,y,array=[];
