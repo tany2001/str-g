@@ -10,11 +10,19 @@ var unitStats=[], terrainImage=[];
 //2 - rock
 //3 - gold
 
-for(var i = 0;i < 4;i ++)
+for(var i = 0;i <= 3;i ++)
 {		
 	terrainImage[i]=new Image();
 	terrainImage[i].src="terrain/" + i + ".png";	
 }
+
+var endTurn =
+{
+    img: new Image(),
+    pos: new Vector(665, 576),
+    size: new Vector(56, 20),
+}
+endTurn.img.src = "ET.png";
 
 function create2dArray(sizeX,sizeY,value){
 	var x,y,array=[];
@@ -81,10 +89,10 @@ function Player(name)
 	this.cam = new Vector(0, 0);
 	this.resourses = 
 	{
-		wood: 100;
-		gold: 10;
-		food: 100;
-		stone: 50;
+		wood: 100,
+		gold: 10,
+		food: 100,
+		stone: 50,
 	}
 	this.name = name;
 }
@@ -112,3 +120,16 @@ function checkKeyUp(e)
 }
 
 var drawView = 60;
+
+function rectCollision(x1, y1, sizeX1, sizeY1, x2, y2, sizeX2, sizeY2) 
+{ 
+    if(x1 <= x2 && x1 + sizeX1 >= x2 && y1 <= y2 && y1 + sizeY1 >= y2) 
+    { 
+        return true; 
+    } 
+    if(x1 >= x2 && x1 <= x2 + sizeX2 && y1 >= y2 && y1 <= y2 + sizeY2) 
+    { 
+        return true; 
+    } 
+    return false; 
+} 

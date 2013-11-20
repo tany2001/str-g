@@ -18,6 +18,14 @@ function draw()
 		}
 		
 	}
+    
+    context.fillStyle = "black";
+    context.fillRect(600, 200, 200, 400);
+    
+	context.fillStyle = "white"; context.font = "15px Arial";
+	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215);
+    
+    context.drawImage(endTurn.img, endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y);
 
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
