@@ -22,7 +22,7 @@ function draw()
     context.fillRect(600, 200, 200, 400);
     
 	context.fillStyle = "white"; context.font = "15px Arial";
-	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215);
+	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215, 200);
     
     context.drawImage(endTurn.img, endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y);
     
@@ -35,11 +35,16 @@ function draw()
     
     context.drawImage(statusBar.money, 200, 0, 40, 40); context.strokeRect(200, 0, 40, 40);
     context.fillRect(240, 0, 60, 40); context.strokeRect(240, 0, 60, 40);
+
+
+    context.drawImage(statusBar.stone, 300, 0, 40, 40); context.strokeRect(300, 0, 40, 40);
+    context.fillRect(340, 0, 60, 40); context.strokeRect(340, 0, 60, 40);
     
     context.fillStyle = "black";
     context.fillText(players[currentPlayer].resourses.food, 40, 28);
     context.fillText(players[currentPlayer].resourses.wood, 140, 28);
-    context.fillText(players[currentPlayer].resourses.wood, 240, 28);
+    context.fillText(players[currentPlayer].resourses.money, 240, 28);
+    context.fillText(players[currentPlayer].resourses.stone, 340, 28);
 
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
