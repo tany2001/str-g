@@ -5,9 +5,8 @@ colors[2] = "brown";
 colors[3] = "yellow";
 
 function draw()
-{
+{   
 	var defaultTrrSize = 10;
-
 	var sx = players[currentPlayer].cam.x, sy = players[currentPlayer].cam.y;
 
 	for(var i = sx;i < sx + drawView;i ++)
@@ -26,6 +25,21 @@ function draw()
 	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215);
     
     context.drawImage(endTurn.img, endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y);
+    
+    
+    context.drawImage(statusBar.food, 0, 0, 40, 40); context.strokeRect(0, 0, 40, 40);
+    context.fillRect(40, 0, 60, 40); context.strokeRect(40, 0, 60, 40);
+    
+    context.drawImage(statusBar.wood, 100, 0, 40, 40); context.strokeRect(100, 0, 40, 40);
+    context.fillRect(140, 0, 60, 40); context.strokeRect(140, 0, 60, 40);
+    
+    context.drawImage(statusBar.money, 200, 0, 40, 40); context.strokeRect(200, 0, 40, 40);
+    context.fillRect(240, 0, 60, 40); context.strokeRect(240, 0, 60, 40);
+    
+    context.fillStyle = "black";
+    context.fillText(players[currentPlayer].resourses.food, 40, 28);
+    context.fillText(players[currentPlayer].resourses.wood, 140, 28);
+    context.fillText(players[currentPlayer].resourses.wood, 240, 28);
 
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);

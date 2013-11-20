@@ -90,7 +90,7 @@ function Player(name)
 	this.resourses = 
 	{
 		wood: 100,
-		gold: 10,
+		money: 10,
 		food: 100,
 		stone: 50,
 	}
@@ -133,3 +133,15 @@ function rectCollision(x1, y1, sizeX1, sizeY1, x2, y2, sizeX2, sizeY2)
     } 
     return false; 
 } 
+
+var statusBar =
+{
+    food: new Image(),
+    wood: new Image(),
+    money: new Image(),
+    stone: new Image()
+}
+statusBar.food.src = "status bar/food.png";
+statusBar.wood.src = "status bar/wood.jpg";
+statusBar.money.src = "status bar/coins.jpg";
+statusBar.stone.src = "status bar/stone.jpg";

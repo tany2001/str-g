@@ -29,7 +29,7 @@ document.addEventListener('mousedown', mouse, false);
 
 function mouse(e)
 {
-    if(rectCollision(endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y, e.clientX, e.clientY, 1, 1))
+    if(rectCollision(endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y, e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 1, 1))
     {
         currentPlayer ++;
         if(currentPlayer >= players.length){currentPlayer = 0;}
