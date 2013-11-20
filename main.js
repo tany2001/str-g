@@ -65,7 +65,7 @@ var map = new Map();
 
 function  Unit (type) {
 	
-	this = unitStats[type]
+	this = unitStats[type];
 	
 };
 
@@ -76,15 +76,24 @@ Array.prototype.remove = function(from, to)
   return this.push.apply(this, rest);
 };
 
-function Player()
+function Player(name)
 {
 	this.cam = new Vector(0, 0);
+	this.resourses = 
+	{
+		wood: 100;
+		gold: 10;
+		food: 100;
+		stone: 50;
+	}
+	this.name = name;
 }
 
 var currentPlayer = 0;
 var players = [];
 
-players.push(new Player());
+players.push(new Player("PLayer 1"));
+players.push(new Player("Player 2"));
 
 var pressedKey = [];
 document.addEventListener('keydown', checkKeyDown, false);
