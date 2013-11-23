@@ -29,9 +29,14 @@ document.addEventListener('mousedown', mouse, false);
 
 function mouse(e)
 {
-    if(rectCollision(endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y, e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 1, 1))
+	mouse.x=e.clientX- canvas.offsetLeft;
+	mouse.y=e.clientY- canvas.offsetTop;
+    if(rectCollision(endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y, e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 0, 0))
     {
         currentPlayer ++;
         if(currentPlayer >= players.length){currentPlayer = 0;}
     }
+	if (rectCollision(0,0,drawView*10,drawView*10, mouse.x,mouse.y, 0, 0)){
+		map.unit[Math.floor (mouse.x/10)][Math.floor (mouse.y/10)]="worker";
+	}
 }

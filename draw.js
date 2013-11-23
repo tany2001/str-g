@@ -18,6 +18,20 @@ function draw()
 		
 	}
     
+	for(var i = sx;i < sx + drawView;i ++)
+	{
+		for(var j = sy;j < sy + drawView;j ++)
+		{
+			if (map.unit[i][j]!=0){
+				//console.log (i,j,unitStats[0].image);
+				
+				context.drawImage(unitStats[map.unit[i][j]].image,0,0,unitStats[map.unit[i][j]].frameSize.x,unitStats[map.unit[i][j]].frameSize.y,(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
+				
+			}
+		}
+		
+	}
+	
     context.fillStyle = "black";
     context.fillRect(600, 200, 200, 400);
     
@@ -55,8 +69,10 @@ drawUI();
 function drawUI()
 {
 	context.fillStyle = "black"; var multy = 2;
-	var defaultTrrSize = 200 / map.size.x; context.fillRect(canvas.width - 200, 0, 200, canvas.height);
 
+	var defaultTrrSize = 200 / map.size.x;
+
+	context.fillRect(canvas.width - 200, 0, 200, canvas.height);
 	for(var i = 0;i < map.size.x;i += multy)
 	{
 		for(var j = 0;j < map.size.y;j += multy)

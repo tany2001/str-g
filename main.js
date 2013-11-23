@@ -15,7 +15,6 @@ for(var i = 0;i <= 3;i ++)
 	terrainImage[i]=new Image();
 	terrainImage[i].src="terrain/" + i + ".png";	
 }
-
 var endTurn =
 {
     img: new Image(),
@@ -35,9 +34,23 @@ function create2dArray(sizeX,sizeY,value){
 	return array;
 }
 
-unitStats["worker"] = new Stat(10, 1, 5, 0 , "a.png" , 1 , 1);
+function Stat(hp, damage, speed, cappacity, image , sizeX, sizeY , frameSizeX , frameSizeY){
 
-unitStats["soldier"] = new Stat(20, 2, 5 ,0 , "a.png" , 1 , 1)
+	this.hp = hp;
+	this.damage = damage;
+	this.speed = speed;
+	this.cappacity = cappacity;
+	this.image = new Image();
+	this.image.src = image;
+	this.size = new Vector(sizeX, sizeY);
+	this.frameSize = new Vector(frameSizeX,frameSizeY);
+}
+
+unitStats["worker"] = new Stat(10, 1, 5, 0 , "worker.png" , 1 , 1,43,43);
+
+unitStats["soldier"] = new Stat(20, 2, 5 ,0 , "soldier.png" , 1 , 1,53,53);
+
+unitStats["knight"] = new Stat(20, 2, 5 ,0 , "knight.png" , 1 , 1);
 
 unitStats["small_ship"] = new Stat(50, 2, 8 , 10, "a.png" , 1 , 1);
 
@@ -45,16 +58,6 @@ unitStats["big_ship"] = new Stat(50, 2, 5 , 20 , "a.png" , 1 , 1);
 
 unitStats["main_building"] = new Stat(100 , 0 , 0 , 5 , "a.png" , 2 , 2);
 
-function Stat(hp, damage, speed, cappacity, image , sizeX, sizeY){
-
-	this.hp = hp;
-	this.damage = damage;
-	this.speed = speed;
-	this.cappacity = cappacity;
-	this.image = new Image();
-	this.image = image;
-	this.size = new Vector(sizeX, sizeY);
-}
 
 function Vector(x,y){
 	this.x=x;
@@ -70,6 +73,7 @@ function Map(){
 }
 
 var map = new Map();
+map.unit[50][51]="worker";
 
 function  Unit (type) {
 	
@@ -79,9 +83,9 @@ function  Unit (type) {
 
 Array.prototype.remove = function(from, to)
 {
-  var rest = this.slice((to || from) + 1 || this.length);
-  this.length = from < 0 ? this.length + from : from;
-  return this.push.apply(this, rest);
+	var rest = this.slice((to || from) + 1 || this.length);
+	this.length = from < 0 ? this.length + from : from;
+	return this.push.apply(this, rest);
 };
 
 function Player(name)
