@@ -123,7 +123,7 @@ function checkKeyUp(e)
     e.preventDefault();
 }
 
-var drawView = 60;
+var drawView = 60, defaultTrrSize = 10;
 
 function rectCollision(x1, y1, sizeX1, sizeY1, x2, y2, sizeX2, sizeY2) 
 { 

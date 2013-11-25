@@ -6,7 +6,6 @@ colors[3] = "yellow";
 
 function draw()
 {   
-	var defaultTrrSize = 10;
 	var sx = players[currentPlayer].cam.x, sy = players[currentPlayer].cam.y;
 
 	for(var i = sx;i < sx + drawView;i ++)
@@ -14,17 +13,8 @@ function draw()
 		for(var j = sy;j < sy + drawView;j ++)
 		{
 			context.drawImage(terrainImage[map.value[i][j]],(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
-		}
-		
-	}
-    
-	for(var i = sx;i < sx + drawView;i ++)
-	{
-		for(var j = sy;j < sy + drawView;j ++)
-		{
-			if (map.unit[i][j]!=0){
-				//console.log (i,j,unitStats[0].image);
-				
+            if (map.unit[i][j]!=0)
+            {
 				context.drawImage(unitStats[map.unit[i][j]].image,0,0,unitStats[map.unit[i][j]].frameSize.x,unitStats[map.unit[i][j]].frameSize.y,(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 				
 			}
