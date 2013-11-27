@@ -36,7 +36,14 @@ function mouse(e)
         currentPlayer ++;
         if(currentPlayer >= players.length){currentPlayer = 0;}
     }
-	if (rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, mouse.x, mouse.y, 0, 0)){
-		map.unit[Math.floor(mouse.x/defaultTrrSize) + players[currentPlayer].cam.x][Math.floor (mouse.y/defaultTrrSize)  + players[currentPlayer].cam.y]="worker";
+	if (rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, mouse.x, mouse.y, 0, 0))
+    {
+        var cx = Math.floor(mouse.x/defaultTrrSize) + players[currentPlayer].cam.x, cy = Math.floor (mouse.y/defaultTrrSize)  + players[currentPlayer].cam.y;
+        
+        if(typeof map.unit[cx][cy] != 0)
+        {
+            console.log("unit");
+        }
+		
 	}
 }

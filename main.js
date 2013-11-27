@@ -78,7 +78,7 @@ map.unit[50][51]="worker";
 function  Unit (type) {
 	
 	this = unitStats[type];
-	
+	this.movesLeft = this.speed;
 };
 
 Array.prototype.remove = function(from, to)

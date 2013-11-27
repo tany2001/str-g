@@ -16,7 +16,6 @@ function draw()
             if (map.unit[i][j]!=0)
             {
 				context.drawImage(unitStats[map.unit[i][j]].image,0,0,unitStats[map.unit[i][j]].frameSize.x,unitStats[map.unit[i][j]].frameSize.y,(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
-				
 			}
 		}
 		
