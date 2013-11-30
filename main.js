@@ -73,11 +73,17 @@ function Map(){
 }
 
 var map = new Map();
-map.unit[50][51]=new Unit ("worker");
+map.unit[50][51] = new Unit("worker");
 
-function Unit(type) {
+function Unit(type)
+{
 	
-	this = unitStats[type];
+	this.hp = unitStats[type].hp;
+	this.speed = unitStats[type].speed;
+	this.damage = unitStats[type].damage;
+	this.cappacity = unitStats[type].cappacity;
+	this.type = type;
+
 	this.movesLeft = this.speed;
 	this.target = new Vector();
 };

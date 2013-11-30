@@ -18,7 +18,8 @@ function draw()
 			context.drawImage(terrainImage[map.value[i][j]],(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
             if(map.unit[i][j]!=0)
             {
-				context.drawImage(unitStats[map.unit[i][j]].image,0,0,unitStats[map.unit[i][j]].frameSize.x,unitStats[map.unit[i][j]].frameSize.y,
+            	var t = map.unit[i][j].type;
+				context.drawImage(unitStats[t].image,0,0,unitStats[t].frameSize.x,unitStats[t].frameSize.y,
 															(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 			}
 		}
@@ -40,9 +41,9 @@ function draw()
 	context.fillStyle = "white"; context.font = "15px Arial";
 	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215, 200);
 	if (players[currentPlayer].selected.x!=-1){
-		context.fillText("Health Points: " + map[players[currentPlayer].selected.x][players[currentPlayer].selected.y].hp,canvas.width - 200, 255, 200);
-		context.fillText("Speed: " + map[players[currentPlayer].selected.x][players[currentPlayer].selected.y].movesLeft + "/" +
-					map[players[currentPlayer].selected.x][players[currentPlayer].selected.y].speed,canvas.width - 200, 270, 200);
+		var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
+		context.fillText("Health Poins: " + map.unit[sx][sy].hp,canvas.width - 200, 255, 200);
+		context.fillText("Speed: " + map.unit[sx][sy].movesLeft + "/" + map.unit[sx][sy].speed,canvas.width - 200, 270, 200);
 	}
     
     context.drawImage(endTurn.img, endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y);

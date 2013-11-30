@@ -31,8 +31,9 @@ function mouse(e)
 {
 	//console.log(e);
 
-	mouse.x=e.clientX- canvas.offsetLeft;
-	mouse.y=e.clientY- canvas.offsetTop;
+	var cuk = new Vector();
+	cuk.x=e.clientX- canvas.offsetLeft;
+	cuk.y=e.clientY- canvas.offsetTop;
 
 	//endTurn
     if(rectCollision(endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y, e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 0, 0))
@@ -42,13 +43,12 @@ function mouse(e)
     }
 
     //cukane
-	if(rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, mouse.x, mouse.y, 0, 0))
-    {
-    	if(e.wich == 1)
-    	{
-    		var cx = Math.floor(mouse.x/defaultTrrSize) + players[currentPlayer].cam.x, cy = Math.floor (mouse.y/defaultTrrSize)  + players[currentPlayer].cam.y;
-
-	        if(typeof map.unit[cx][cy] != "number")
+	if(rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, cuk.x, cuk.y, 0, 0))
+    {  
+    	var cx = Math.floor(cuk.x/defaultTrrSize) + players[currentPlayer].cam.x, cy = Math.floor (cuk.y/defaultTrrSize)  + players[currentPlayer].cam.y;
+    	if(e.which == 1)
+    	{	
+	        if(map.unit[cx][cy] != 0)
 	        {
 	        	console.log("selected Unit: " + cx + " " + cy);
 
