@@ -66,9 +66,10 @@ function mouse(e)
         
 		if(e.which == 3)//desen buton
 		{
-			if(players[currentPlayer].selected.x != -1)
+			var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
+				
+			if(players[currentPlayer].selected.x != -1 && (cx != sx || cy != sy) )
 			{
-				var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
 				map.unit[cx][cy] = map.unit[sx][sy];
 				map.unit[sx][sy] = 0;
 				players[currentPlayer].selected.x = cx;
