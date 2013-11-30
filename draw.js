@@ -4,6 +4,9 @@ colors[1] = "green";
 colors[2] = "brown";
 colors[3] = "yellow";
 
+var multy = 1;
+var defaultTrrSize2 = 200 / map.size.x ;
+
 function draw()
 {   
 	var sx = players[currentPlayer].cam.x, sy = players[currentPlayer].cam.y;
@@ -19,6 +22,15 @@ function draw()
 			}
 		}
 		
+	}
+	
+	for(var i = sx;i < sx + drawView;i += multy)
+	{
+		for(var j = sy;j < sy + drawView;j += multy)
+		{
+			context.fillStyle = colors[map.value[i][j]];
+			context.fillRect(i * defaultTrrSize2 + canvas.width - 200, j * defaultTrrSize2, defaultTrrSize2 * multy, defaultTrrSize2 * multy);
+		}
 	}
 	
     context.fillStyle = "black";
@@ -48,7 +60,12 @@ function draw()
     context.fillText(players[currentPlayer].resourses.wood, 140, 28);
     context.fillText(players[currentPlayer].resourses.money, 240, 28);
     context.fillText(players[currentPlayer].resourses.stone, 340, 28);
-
+	
+	context.fillStyle="white";
+	context.globalAlpha=0.5;
+	context.strokeRect(canvas.width-200+sx*defaultTrrSize2,0+sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
+	context.globalAlpha=1;
+	
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 }
@@ -57,9 +74,7 @@ drawUI();
 
 function drawUI()
 {
-	context.fillStyle = "black"; var multy = 1;
-
-	var defaultTrrSize = 200 / map.size.x;
+	context.fillStyle = "black";
 
 	context.fillRect(canvas.width - 200, 0, 200, canvas.height);
 	for(var i = 0;i < map.size.x;i += multy)
@@ -67,7 +82,7 @@ function drawUI()
 		for(var j = 0;j < map.size.y;j += multy)
 		{
 			context.fillStyle = colors[map.value[i][j]];
-			context.fillRect(i * defaultTrrSize + canvas.width - 200, j * defaultTrrSize, defaultTrrSize * multy, defaultTrrSize * multy);
+			context.fillRect(i * defaultTrrSize2 + canvas.width - 200, j * defaultTrrSize2, defaultTrrSize2 * multy, defaultTrrSize2 * multy);
 		}
 	}
 }
