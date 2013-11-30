@@ -71,6 +71,8 @@ function mouse(e)
 				var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
 				map.unit[cx][cy] = map.unit[sx][sy];
 				map.unit[sx][sy] = 0;
+				players[currentPlayer].selected.x = cx;
+				players[currentPlayer].selected.y = cy;
 			}
 		}
 	}
