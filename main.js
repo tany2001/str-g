@@ -73,7 +73,7 @@ function Map(){
 }
 
 var map = new Map();
-map.unit[50][51]="worker";
+map.unit[50][51]=new Unit ("worker");
 
 function Unit(type) {
 	
