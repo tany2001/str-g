@@ -29,6 +29,8 @@ document.addEventListener('mousedown', mouse, false);
 
 function mouse(e)
 {
+	//console.log(e);
+
 	mouse.x=e.clientX- canvas.offsetLeft;
 	mouse.y=e.clientY- canvas.offsetTop;
 
@@ -40,18 +42,19 @@ function mouse(e)
     }
 
     //cukane
-	if (rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, mouse.x, mouse.y, 0, 0))
+	if(rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, mouse.x, mouse.y, 0, 0))
     {
-        var cx = Math.floor(mouse.x/defaultTrrSize) + players[currentPlayer].cam.x, cy = Math.floor (mouse.y/defaultTrrSize)  + players[currentPlayer].cam.y;
+    	if(e.wich == 1)
+    	{
+    		var cx = Math.floor(mouse.x/defaultTrrSize) + players[currentPlayer].cam.x, cy = Math.floor (mouse.y/defaultTrrSize)  + players[currentPlayer].cam.y;
+
+	        if(typeof map.unit[cx][cy] != "number")
+	        {
+	            players[currentPlayer].selected.x = cx;
+	            players[currentPlayer].selected.y = cy;
+	        }	
+    	}
         
-        console.log(typeof map.unit[cx][cy]);
-
-        contextMinimap.fillRect(0, 0, 30, 30);
-
-        if(typeof map.unit[cx][cy] != number)
-        {
-            console.log("unit");
-        }
 		
 	}
 }

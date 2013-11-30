@@ -75,10 +75,11 @@ function Map(){
 var map = new Map();
 map.unit[50][51]="worker";
 
-function  Unit (type) {
+function Unit(type) {
 	
 	this = unitStats[type];
 	this.movesLeft = this.speed;
+	this.target = new Vector();
 };
 
 Array.prototype.remove = function(from, to)
@@ -99,12 +100,13 @@ function Player(name)
 		stone: 50,
 	}
 	this.name = name;
+	this.selected = new Vector(-1, -1);//ako e (-1;-1), ne e selectnal nishto
 }
 
 var currentPlayer = 0;
 var players = [];
 
-players.push(new Player("PLayer 1"));
+players.push(new Player("Player 1"));
 players.push(new Player("Player 2"));
 
 var pressedKey = [];
