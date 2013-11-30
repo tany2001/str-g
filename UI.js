@@ -46,7 +46,8 @@ function mouse(e)
 	if(rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, cuk.x, cuk.y, 0, 0))
     {  
     	var cx = Math.floor(cuk.x/defaultTrrSize) + players[currentPlayer].cam.x, cy = Math.floor (cuk.y/defaultTrrSize)  + players[currentPlayer].cam.y;
-    	if(e.which == 1)
+
+    	if(e.which == 1)//lqv buton
     	{	
 	        if(map.unit[cx][cy] != 0)
 	        {
@@ -54,9 +55,23 @@ function mouse(e)
 
 	            players[currentPlayer].selected.x = cx;
 	            players[currentPlayer].selected.y = cy;
+	        }
+	        else
+	        {
+				console.log("Unselected Unit!");	   
+				players[currentPlayer].selected.x = -1;
+				players[currentPlayer].selected.y = -1;
 	        }	
     	}
         
-		
+		if(e.which == 3)//desen buton
+		{
+			if(players[currentPlayer].selected.x != -1)
+			{
+				var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
+				map.unit[cx][cy] = map.unit[sx][sy];
+				map.unit[sx][sy] = 0;
+			}
+		}
 	}
 }
