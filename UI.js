@@ -50,6 +50,8 @@ function mouse(e)
 
 	        if(typeof map.unit[cx][cy] != "number")
 	        {
+	        	console.log("selected Unit: " + cx + " " + cy);
+
 	            players[currentPlayer].selected.x = cx;
 	            players[currentPlayer].selected.y = cy;
 	        }	
