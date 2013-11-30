@@ -13,7 +13,7 @@ function draw()
 		for(var j = sy;j < sy + drawView;j ++)
 		{
 			context.drawImage(terrainImage[map.value[i][j]],(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
-            if (map.unit[i][j]!=0)
+            if(map.unit[i][j]!=0)
             {
 				context.drawImage(unitStats[map.unit[i][j]].image,0,0,unitStats[map.unit[i][j]].frameSize.x,unitStats[map.unit[i][j]].frameSize.y,(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 			}
@@ -57,7 +57,7 @@ drawUI();
 
 function drawUI()
 {
-	context.fillStyle = "black"; var multy = 2;
+	context.fillStyle = "black"; var multy = 1;
 
 	var defaultTrrSize = 200 / map.size.x;
 
