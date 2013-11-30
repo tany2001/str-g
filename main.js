@@ -73,9 +73,9 @@ function Map(){
 }
 
 var map = new Map();
-map.unit[50][51] = new Unit("worker");
-
-function Unit(type)
+map.unit[50][51] = new Unit("worker",true);
+var stack=[];
+function Unit(type,isStart)
 {
 	
 	this.hp = unitStats[type].hp;
@@ -83,9 +83,13 @@ function Unit(type)
 	this.damage = unitStats[type].damage;
 	this.cappacity = unitStats[type].cappacity;
 	this.type = type;
+	this.direction = 0;
+	this.frame = 0;
+	this.frameSize = new Vector (unitStats[type].frameSize.x,unitStats[type].frameSize.y);
 
 	this.movesLeft = this.speed;
 	this.target = new Vector();
+	this.isStart = isStart;
 };
 
 Array.prototype.remove = function(from, to)

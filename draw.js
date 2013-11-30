@@ -16,11 +16,11 @@ function draw()
 		for(var j = sy;j < sy + drawView;j ++)
 		{
 			context.drawImage(terrainImage[map.value[i][j]],(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
-            if(map.unit[i][j]!=0)
+            if(map.unit[i][j]!=0 && map.unit[i][j].isStart)
             {
             	var t = map.unit[i][j].type;
-				context.drawImage(unitStats[t].image,0,0,unitStats[t].frameSize.x,unitStats[t].frameSize.y,
-															(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
+				context.drawImage(unitStats[t].image,map.unit[i][j].frame*map.unit[i][j].frameSize.x,map.unit[i][j].direction*map.unit[i][j].frameSize.y,
+				unitStats[t].frameSize.x,unitStats[t].frameSize.y,(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 			}
 		}
 		
@@ -68,7 +68,7 @@ function draw()
     context.fillText(players[currentPlayer].resourses.money, 240, 28);
     context.fillText(players[currentPlayer].resourses.stone, 340, 28);
 	
-	context.fillStyle="white";
+	context.fillStyle = "white";
 	context.globalAlpha=0.5;
 	context.strokeRect(canvas.width-200+sx*defaultTrrSize2,0+sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
 	context.globalAlpha=1;
