@@ -50,7 +50,7 @@ unitStats["worker"] = new Stat(10, 1, 5, 0 , "worker.png" , 1 , 1,43,43);
 
 unitStats["soldier"] = new Stat(20, 2, 5 ,0 , "soldier.png" , 1 , 1,53,53);
 
-unitStats["knight"] = new Stat(20, 2, 5 ,0 , "knight.png" , 1 , 1);
+unitStats["knight"] = new Stat(20, 2, 5 ,0 , "knight.png" , 1 , 1 ,58 ,58);
 
 unitStats["small_ship"] = new Stat(50, 2, 8 , 10, "a.png" , 1 , 1);
 

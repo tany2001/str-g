@@ -42,8 +42,13 @@ function draw()
 	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215, 200);
 	if (players[currentPlayer].selected.x!=-1){
 		var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
-		context.fillText("Health Poins: " + map.unit[sx][sy].hp,canvas.width - 200, 255, 200);
-		context.fillText("Speed: " + map.unit[sx][sy].movesLeft + "/" + map.unit[sx][sy].speed,canvas.width - 200, 270, 200);
+		
+		context.fillText("Health Poins: " + map.unit[sx][sy].hp + "/" + unitStats[map.unit[sx][sy].type].hp,canvas.width - 200, 255, 200);
+		context.fillText("Moves Left: " + map.unit[sx][sy].movesLeft + "/" + map.unit[sx][sy].speed,canvas.width - 200, 270, 200);
+		context.fillText("Damage: " + map.unit[sx][sy].damage,canvas.width - 200, 285, 200);
+		if (unitStats[map.unit[sx][sy].type].cappacity!=0){
+			context.fillText("Cappacity: " + map.unit[sx][sy].cappacity + "/" +unitStats[map.unit[sx][sy].type].cappacity,canvas.width - 200, 300, 200);
+		}
 	}
     
     context.drawImage(endTurn.img, endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y);
