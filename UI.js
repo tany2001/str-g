@@ -31,16 +31,24 @@ function mouse(e)
 {
 	mouse.x=e.clientX- canvas.offsetLeft;
 	mouse.y=e.clientY- canvas.offsetTop;
+
+	//endTurn
     if(rectCollision(endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y, e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 0, 0))
     {
         currentPlayer ++;
         if(currentPlayer >= players.length){currentPlayer = 0;}
     }
+
+    //cukane
 	if (rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, mouse.x, mouse.y, 0, 0))
     {
         var cx = Math.floor(mouse.x/defaultTrrSize) + players[currentPlayer].cam.x, cy = Math.floor (mouse.y/defaultTrrSize)  + players[currentPlayer].cam.y;
         
-        if(typeof map.unit[cx][cy] != 0)
+        console.log(typeof map.unit[cx][cy]);
+
+        contextMinimap.fillRect(0, 0, 30, 30);
+
+        if(typeof map.unit[cx][cy] != number)
         {
             console.log("unit");
         }
