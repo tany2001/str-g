@@ -161,3 +161,10 @@ statusBar.food.src = "status bar/food.png";
 statusBar.wood.src = "status bar/wood.jpg";
 statusBar.money.src = "status bar/coins.jpg";
 statusBar.stone.src = "status bar/stone.jpg";
+
+window.oncontextmenu = function(event)//spira menuto koeto se opravq kogato se natisne desniq buton
+{
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+};
