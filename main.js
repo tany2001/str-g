@@ -102,6 +102,7 @@ Array.prototype.remove = function(from, to)
 function Player(name)
 {
 	this.cam = new Vector(0, 0);
+	this.lastCam = new Vector(0, 0);
 	this.resourses = 
 	{
 		wood: 100,
