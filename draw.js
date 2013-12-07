@@ -4,8 +4,7 @@ colors[1] = "green";
 colors[2] = "brown";
 colors[3] = "yellow";
 
-var multy = 1;
-var defaultTrrSize2 = 200 / map.size.x ;
+var multy = 1, defaultTrrSize2 = 200 / map.size.x ;
 
 function draw()
 {   
@@ -54,16 +53,22 @@ function draw()
 	context.globalAlpha=1;
 
 	players[currentPlayer].lastCam = players[currentPlayer].cam;
-	
+		
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 }
 
 function drawUnitStat()
 {
-	context.fillStyle = "white"; context.font = "15px Arial";
+	context.fillStyle = "black";
+	context.font = "15px Arial";
+	context.fillRect(canvas.width - 200, 200, 200,20);
+	context.fillStyle = "white";
 	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215, 200);
 
+	context.fillStyle="black";
+	context.fillRect(canvas.width - 200, 240, 200, 400);
+	context.fillStyle="white";
 	if (players[currentPlayer].selected.x!=-1){
 		var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
 		
