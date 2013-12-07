@@ -9,6 +9,11 @@ var defaultTrrSize2 = 200 / map.size.x ;
 
 function draw()
 {   
+	if(players[currentPlayer].cam != players[currentPlayer].lastCam)
+	{
+		console.log("asd");
+	}
+
 	var sx = players[currentPlayer].cam.x, sy = players[currentPlayer].cam.y;
 
 	for(var i = sx;i < sx + drawView;i ++)
@@ -25,6 +30,8 @@ function draw()
 		}
 		
 	}
+
+	var sx = players[currentPlayer].lastCam.x, sy = players[currentPlayer].lastCam.y;
 	
 	for(var i = sx;i < sx + drawView;i += multy)
 	{
@@ -45,6 +52,8 @@ function draw()
 	context.globalAlpha=0.5;
 	context.strokeRect(canvas.width-200+sx*defaultTrrSize2,0+sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
 	context.globalAlpha=1;
+
+	players[currentPlayer].lastCam = players[currentPlayer].cam;
 	
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);

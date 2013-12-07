@@ -1,6 +1,5 @@
 function moveCamera()
-{
-	players[currentPlayer].lastCam = players[currentPlayer].cam;
+{ 
 	var s = 5;
 
 	if(pressedKey[87] && players[currentPlayer].cam.y - s >= 0)
