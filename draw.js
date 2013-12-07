@@ -6,6 +6,36 @@ colors[3] = "yellow";
 
 var multy = 1, defaultTrrSize2 = 200 / map.size.x ;
 
+var terrainImg=[],i=[];
+for (i[0]=0;i[0]<2;i[0]++){
+	terrainImg[i[0]]=[];
+	for (i[1]=0;i[1]<2;i[1]++){
+		terrainImg[i[0]][i[1]]=[];
+		for (i[2]=0;i[2]<2;i[2]++){	
+			terrainImg[i[0]][i[1]][i[2]]=[];
+			for (i[3]=0;i[3]<2;i[3]++){
+				terrainImg[i[0]][i[1]][i[2]][i[3]]=[];
+				for (i[4]=0;i[4]<2;i[4]++){
+					terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]]=[];
+					for (i[5]=0;i[5]<2;i[5]++){
+						terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]][i[5]]=[];
+						for (i[6]=0;i[6]<2;i[6]++){
+							terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]][i[5]][i[6]]=[];
+							for (i[7]=0;i[7]<2;i[7]++){
+								terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]][i[5]][i[6]][i[7]]=[];
+								for (i[8]=0;i[8]<2;i[8]++){
+									terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]][i[5]][i[6]][i[7]][i[8]]=new Image();
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+terrainImg[0][0][0][0][0][0][0][0][0].src="terrain/0.png";
+
 function draw()
 {   
 	if(players[currentPlayer].cam != players[currentPlayer].lastCam)
@@ -53,7 +83,10 @@ function draw()
 	context.globalAlpha=1;
 
 	players[currentPlayer].lastCam = players[currentPlayer].cam;
-		
+	
+	
+	//context.drawImage(terrainImg[0][0][0][0][0][0][0][0][0],100,100,50,50);
+	
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 }
