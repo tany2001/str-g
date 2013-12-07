@@ -34,12 +34,27 @@ function draw()
 			context.fillRect(i * defaultTrrSize2 + canvas.width - 200, j * defaultTrrSize2, defaultTrrSize2 * multy, defaultTrrSize2 * multy);
 		}
 	}
-	
-    context.fillStyle = "black";
-    context.fillRect(600, 200, 200, 400);
     
+	drawUnitStat();
+    
+    context.drawImage(endTurn.img, endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y);
+    
+    drawResourceBar();
+   
+	context.fillStyle = "white";
+	context.globalAlpha=0.5;
+	context.strokeRect(canvas.width-200+sx*defaultTrrSize2,0+sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
+	context.globalAlpha=1;
+	
+	requestAnimationFrame(draw);
+	context.strokeRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawUnitStat()
+{
 	context.fillStyle = "white"; context.font = "15px Arial";
 	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215, 200);
+
 	if (players[currentPlayer].selected.x!=-1){
 		var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
 		
@@ -50,11 +65,11 @@ function draw()
 			context.fillText("Cappacity: " + map.unit[sx][sy].cappacity + "/" +unitStats[map.unit[sx][sy].type].cappacity,canvas.width - 200, 300, 200);
 		}
 	}
-    
-    context.drawImage(endTurn.img, endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y);
-    
-    
-    context.drawImage(statusBar.food, 0, 0, 40, 40); context.strokeRect(0, 0, 40, 40);
+}
+
+function drawResourceBar()
+{
+	context.drawImage(statusBar.food, 0, 0, 40, 40); context.strokeRect(0, 0, 40, 40);
     context.fillRect(40, 0, 60, 40); context.strokeRect(40, 0, 60, 40);
     
     context.drawImage(statusBar.wood, 100, 0, 40, 40); context.strokeRect(100, 0, 40, 40);
@@ -72,19 +87,9 @@ function draw()
     context.fillText(players[currentPlayer].resourses.wood, 140, 28);
     context.fillText(players[currentPlayer].resourses.money, 240, 28);
     context.fillText(players[currentPlayer].resourses.stone, 340, 28);
-	
-	context.fillStyle = "white";
-	context.globalAlpha=0.5;
-	context.strokeRect(canvas.width-200+sx*defaultTrrSize2,0+sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
-	context.globalAlpha=1;
-	
-	requestAnimationFrame(draw);
-	context.strokeRect(0, 0, canvas.width, canvas.height);
 }
 
-drawUI();
-
-function drawUI()
+function drawMinimap()
 {
 	context.fillStyle = "black";
 
@@ -100,3 +105,4 @@ function drawUI()
 }
 
 draw();
+drawMinimap();
