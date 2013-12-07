@@ -25,6 +25,50 @@ function moveCamera()
 
 moveCamera();
 
+function moveUnit(){
+	if (players[currentPlayer].selected.x!=-1 && players[currentPlayer].selected.y!=-1){
+		if (map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.x!=players[currentPlayer].selected.x || 
+				map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.y!=players[currentPlayer].selected.y){
+			
+			if (players[currentPlayer].selected.x<map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.x){
+				
+				map.unit[players[currentPlayer].selected.x+1][players[currentPlayer].selected.y]=
+											map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y];
+				map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y]=0;
+				players[currentPlayer].selected.x++;	
+			}else {
+				if (players[currentPlayer].selected.x>map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.x){
+					
+					map.unit[players[currentPlayer].selected.x-1][players[currentPlayer].selected.y]=
+												map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y];
+					map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y]=0;
+					players[currentPlayer].selected.x--;	
+				}else {
+					if (players[currentPlayer].selected.y<map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.y){
+				
+						map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y+1]=
+													map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y];
+						map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y]=0;
+						players[currentPlayer].selected.y++;	
+					}else {
+						if (players[currentPlayer].selected.y>map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.y){
+				
+							map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y-1]=
+														map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y];
+							map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y]=0;
+							players[currentPlayer].selected.y--;	
+						}
+					}
+				}
+			}
+			
+		}
+	}
+	setTimeout(moveUnit,30);
+}
+
+moveUnit();
+
 document.addEventListener('mousedown', mouse, false);
 
 function mouse(e)
@@ -70,10 +114,13 @@ function mouse(e)
 				
 			if(players[currentPlayer].selected.x != -1 && (cx != sx || cy != sy) )
 			{
-				map.unit[cx][cy] = map.unit[sx][sy];
+				map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.x = cx;
+				map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.y = cy;
+				/*map.unit[cx][cy] = map.unit[sx][sy];
 				map.unit[sx][sy] = 0;
 				players[currentPlayer].selected.x = cx;
 				players[currentPlayer].selected.y = cy;
+				*/
 			}
 		}
 	}
