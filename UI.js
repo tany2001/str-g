@@ -10,7 +10,6 @@ function moveCamera()
 	{
 		players[currentPlayer].cam.y += s;
 	}
-
 	if(pressedKey[65] && players[currentPlayer].cam.x - s >= 0)
 	{
 		players[currentPlayer].cam.x -= s;
@@ -25,46 +24,41 @@ function moveCamera()
 
 moveCamera();
 
-function moveUnit(){
-	if (players[currentPlayer].selected.x!=-1 && players[currentPlayer].selected.y!=-1){
-		if (map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.x!=players[currentPlayer].selected.x || 
-				map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.y!=players[currentPlayer].selected.y){
-			
-			if (players[currentPlayer].selected.x<map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.x){
-				
-				map.unit[players[currentPlayer].selected.x+1][players[currentPlayer].selected.y]=
-											map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y];
-				map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y]=0;
-				players[currentPlayer].selected.x++;	
-			}else {
-				if (players[currentPlayer].selected.x>map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.x){
-					
-					map.unit[players[currentPlayer].selected.x-1][players[currentPlayer].selected.y]=
-												map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y];
-					map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y]=0;
-					players[currentPlayer].selected.x--;	
-				}else {
-					if (players[currentPlayer].selected.y<map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.y){
-				
-						map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y+1]=
-													map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y];
-						map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y]=0;
-						players[currentPlayer].selected.y++;	
-					}else {
-						if (players[currentPlayer].selected.y>map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.y){
-				
-							map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y-1]=
-														map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y];
-							map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y]=0;
-							players[currentPlayer].selected.y--;	
-						}
+function moveUnit()
+{
+	var moveX = [1, -1, 0, 0];
+	var moveY = [0, 0, 1, -1];
+
+	for(var i = 0;i < toMove.length;i ++)
+	{
+		var c = toMove[i]; //coordinatite na neshtoto za mestene
+		var mu = map.unit[c.x][c.y];//movable unit - neshtot za murdane
+
+		if(!mu.target.path) {mu.setPath(c.x, c.y);} //ako nqma generiran put, da generira
+
+		for(var j = 0;j < moveX.length;j ++)
+		{
+			var c2 = clone(c); c2.x += moveX[j];  c2.y += moveY[j]; //c2 - coordinatite na koito shte se gleda dali moje da se premesti
+			var u = map.unit[c.x][c.y];
+
+			if(u.ways[c.x][c.y] > u.ways[c2.x][c2.y])//ERROR
+			{
+				console.log("ID: 3, out: ", "yes!");
+
+				if(map.unit[c2.x][c2.y] == 0)
+				{
+					map.unit[c2.x][c2.y] = map.unit[c.x][c.y];
+					toMove[i].x = c2.x; toMove[i].y = c2.y;
+					if(map.unit[c2.x][c2.y].target == c2)
+					{
+						console.log("here");
+
 					}
 				}
 			}
-			
 		}
 	}
-	setTimeout(moveUnit,30);
+	setTimeout(moveUnit, 100);
 }
 
 moveUnit();
@@ -73,8 +67,6 @@ document.addEventListener('mousedown', mouse, false);
 
 function mouse(e)
 {
-	//console.log(e);
-
 	var cuk = new Vector();
 	cuk.x=e.clientX- canvas.offsetLeft;
 	cuk.y=e.clientY- canvas.offsetTop;
@@ -89,11 +81,12 @@ function mouse(e)
     //cukane
 	if(rectCollision(0, 0, drawView * defaultTrrSize, drawView * defaultTrrSize, cuk.x, cuk.y, 0, 0))
     {  
+    	//otkriva POLENCE na koeto sme cuknali
     	var cx = Math.floor(cuk.x/defaultTrrSize) + players[currentPlayer].cam.x, cy = Math.floor (cuk.y/defaultTrrSize)  + players[currentPlayer].cam.y;
 
     	if(e.which == 1)//lqv buton
     	{	
-	        if(map.unit[cx][cy] != 0)
+	        if(map.unit[cx][cy] != 0)//ako sum cuknal v/u unit
 	        {
 	        	console.log("selected Unit: " + cx + " " + cy);
 
@@ -102,7 +95,8 @@ function mouse(e)
 	        }
 	        else
 	        {
-				console.log("Unselected Unit!");	   
+				console.log("Unselected Unit!");
+
 				players[currentPlayer].selected.x = -1;
 				players[currentPlayer].selected.y = -1;
 	        }	
@@ -110,17 +104,26 @@ function mouse(e)
         
 		if(e.which == 3)//desen buton
 		{
-			var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
+			var selX = players[currentPlayer].selected.x, selY = players[currentPlayer].selected.y, able = true;
 				
-			if(players[currentPlayer].selected.x != -1 && (cx != sx || cy != sy) )
+			if(selX != -1 && (cx != selX || cy != selY))
 			{
-				map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.x = cx;
-				map.unit[players[currentPlayer].selected.x][players[currentPlayer].selected.y].target.y = cy;
-				/*map.unit[cx][cy] = map.unit[sx][sy];
-				map.unit[sx][sy] = 0;
-				players[currentPlayer].selected.x = cx;
-				players[currentPlayer].selected.y = cy;
-				*/
+				map.unit[selX][selY].target.x = cx;
+				map.unit[selX][selY].target.y = cy;
+
+				for(var i = 0;i < toMove.length;i ++)
+				{
+					console.log("ID: 0, out: ", i);
+					console.log("ID: 1, out: ", toMove);
+					if(toMove[i].x == selX && toMove[i].y == selY)
+					{
+						able = false;
+					}
+				}
+
+				if(able){toMove.push(new Vector(selX, selY));}
+
+				console.log(toMove);
 			}
 		}
 	}

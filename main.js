@@ -75,7 +75,9 @@ function Map(){
 var map = new Map();
 map.unit[50][51] = new Unit("worker",true);
 var stack=[];
-function Unit(type,isStart)
+var toMove = [];
+
+function Unit(type, isStart)
 {
 	
 	this.hp = unitStats[type].hp;
@@ -88,8 +90,51 @@ function Unit(type,isStart)
 	this.frameSize = new Vector (unitStats[type].frameSize.x,unitStats[type].frameSize.y);
 
 	this.movesLeft = this.speed;
+
 	this.target = new Vector();
+	this.target.path = false;
+
 	this.isStart = isStart;
+
+	this.ways = create2dArray(map.size.x, map.size.y, 0);
+
+	this.setPath = function(sx, sy)
+	{
+		console.log("Generirane na put...");
+
+		var next = []; var used = create2dArray(map.size.x, map.size.y, false); // osnovni masivi...
+		next.push(new Vector(this.target.x, this.target.y)); next[0].n = 1; // zadavane na nachalo
+
+		var moveX = [1, -1, 0, 0]; // oshte osnovni masivi
+		var moveY = [0, 0, 1, -1];
+
+		while(next.length > 0)
+		{
+			var c = next[0];
+			next.remove(0);
+			this.ways[c.x][c.y] = c.n;
+
+			for(var i = 0;i < moveX.length;i ++)
+			{
+				var c2 = new Vector(c.x + moveX[i], c.y + moveY[i]);
+
+				if(c2.x >= 0 && c2.x < map.size.x && c2.y >= 0 && c2.y < map.size.y && !used[c2.x][c2.y])// ako ne barame izvun mapa
+				{
+					used[c.x][c.y] = true;
+
+					var p = new Vector(c2.x, c2.y);// pravime promenliva za push-vane
+					p.n = c2.n + 1;
+
+					next.push(p); // pushvane
+				}
+			}
+
+			if(c.x == sx && c.y == sy){break;}// ako sme na coordinatite koito tursim, da spe da se tursi oshte
+		}
+
+		this.target.path = true;
+		console.log("Putqt generiran!");
+	}
 };
 
 Array.prototype.remove = function(from, to)
@@ -103,6 +148,7 @@ function Player(name)
 {
 	this.cam = new Vector(0, 0);
 	this.lastCam = new Vector(0, 0);
+
 	this.resourses = 
 	{
 		wood: 100,
@@ -169,3 +215,13 @@ window.oncontextmenu = function(event)//spira menuto koeto se opravq kogato se n
     event.stopPropagation();
     return false;
 };
+
+function clone(obj1)
+{
+	var r = {};
+	for(var i in obj1)
+	{
+		r[i] = obj1[i];
+	}
+	return r;
+}
