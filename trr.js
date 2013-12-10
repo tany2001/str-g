@@ -73,3 +73,25 @@ for(var i = 0;i < map.size.x;i ++)
 		}
 	}
 }
+
+var moveX = [1, -1, 0, 0];
+var moveY = [0, 0, 1, -1];
+
+for(var i = 1;i < map.size.x - 1;i ++)
+{
+	for(var j = 1;j < map.size.y - 1;j ++)
+	{
+		var c = map.value[i][j], c2 = map.value[i + 1][j]; var a = 0;
+		for(var k = 0;k < moveX.length;k ++)
+		{
+			if(map.value[i + moveX[k]][j + moveY[k]] != c && map.value[i + moveX[k]][j + moveY[k]] == c2)
+			{
+				a ++;
+			}
+		}
+		if(a == 4)
+		{
+			map.value[i][j] = c2;
+		}
+	}
+}

@@ -33,6 +33,7 @@ function moveUnit()
 	{
 		var c = clone(toMove[i]); //coordinatite na neshtoto za mestene
 		var mu = map.unit[c.x][c.y];//movable unit - neshtot za murdane
+		var any = false; //da iztriq li ot toMove
 
 		if(!mu.target.path) {mu.setPath(c.x, c.y);} //ako nqma generiran put, da generira
 
@@ -41,25 +42,20 @@ function moveUnit()
 			var c2 = clone(c); c2.x += moveX[j];  c2.y += moveY[j]; //c2 - coordinatite na koito shte se gleda dali moje da se premesti
 			var u = map.unit[c.x][c.y];
 
-			console.log("ID: 4, out: ", u.ways[c.x][c.y], u.ways[c2.x][c2.y]);
-
 			if(u.ways[c.x][c.y] > u.ways[c2.x][c2.y])// ako iskam da se premestq na block-che, koeto e po-blizo...
 			{
+				any = true;
 				if(map.unit[c2.x][c2.y] == 0)// i e prazno...
 				{
 					map.unit[c2.x][c2.y] = u;//se mestq!
 					u = 0;
 
 					toMove[i].x = c2.x; toMove[i].y = c2.y;
-
-					if(map.unit[c2.x][c2.y].target.x == c2.x && map.unit[c2.x][c2.y].target.y == c2.y)
-					{
-						console.log("here");
-
-					}
 				}
 			}
 		}
+
+		if(!any){toMove.remove(i);}
 	}
 	setTimeout(moveUnit, 100);
 }
@@ -116,17 +112,13 @@ function mouse(e)
 
 				for(var i = 0;i < toMove.length;i ++)
 				{
-					console.log("ID: 0, out: ", i);
-					console.log("ID: 1, out: ", toMove);
 					if(toMove[i].x == selX && toMove[i].y == selY)
 					{
 						able = false;
 					}
 				}
 
-				if(able){toMove.push(new Vector(selX, selY));}
-
-				console.log(toMove);
+				if(able){toMove.push(new Vector(selX, selY)); map.unit[selX][selY].target.path = false;}
 			}
 		}
 	}
