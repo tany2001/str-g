@@ -31,7 +31,7 @@ function moveUnit()
 
 	for(var i = 0;i < toMove.length;i ++)
 	{
-		var c = toMove[i]; //coordinatite na neshtoto za mestene
+		var c = clone(toMove[i]); //coordinatite na neshtoto za mestene
 		var mu = map.unit[c.x][c.y];//movable unit - neshtot za murdane
 
 		if(!mu.target.path) {mu.setPath(c.x, c.y);} //ako nqma generiran put, da generira
@@ -41,15 +41,18 @@ function moveUnit()
 			var c2 = clone(c); c2.x += moveX[j];  c2.y += moveY[j]; //c2 - coordinatite na koito shte se gleda dali moje da se premesti
 			var u = map.unit[c.x][c.y];
 
-			if(u.ways[c.x][c.y] > u.ways[c2.x][c2.y])//ERROR
-			{
-				console.log("ID: 3, out: ", "yes!");
+			console.log("ID: 4, out: ", u.ways[c.x][c.y], u.ways[c2.x][c2.y]);
 
-				if(map.unit[c2.x][c2.y] == 0)
+			if(u.ways[c.x][c.y] > u.ways[c2.x][c2.y])// ako iskam da se premestq na block-che, koeto e po-blizo...
+			{
+				if(map.unit[c2.x][c2.y] == 0)// i e prazno...
 				{
-					map.unit[c2.x][c2.y] = map.unit[c.x][c.y];
+					map.unit[c2.x][c2.y] = u;//se mestq!
+					u = 0;
+
 					toMove[i].x = c2.x; toMove[i].y = c2.y;
-					if(map.unit[c2.x][c2.y].target == c2)
+
+					if(map.unit[c2.x][c2.y].target.x == c2.x && map.unit[c2.x][c2.y].target.y == c2.y)
 					{
 						console.log("here");
 

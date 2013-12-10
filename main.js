@@ -110,26 +110,26 @@ function Unit(type, isStart)
 
 		while(next.length > 0)
 		{
-			var c = next[0];
+			var c = clone(next[0]);
 			next.remove(0);
 			this.ways[c.x][c.y] = c.n;
-
+ 	
 			for(var i = 0;i < moveX.length;i ++)
 			{
-				var c2 = new Vector(c.x + moveX[i], c.y + moveY[i]);
+				var c2 = new Vector(c.x + moveX[i], c.y + moveY[i]);// novata poziciq
 
 				if(c2.x >= 0 && c2.x < map.size.x && c2.y >= 0 && c2.y < map.size.y && !used[c2.x][c2.y])// ako ne barame izvun mapa
 				{
-					used[c.x][c.y] = true;
+					used[c2.x][c2.y] = true;
 
 					var p = new Vector(c2.x, c2.y);// pravime promenliva za push-vane
-					p.n = c2.n + 1;
+					p.n = c.n + 1;
 
 					next.push(p); // pushvane
 				}
 			}
 
-			if(c.x == sx && c.y == sy){break;}// ako sme na coordinatite koito tursim, da spe da se tursi oshte
+			//if(c.x == sx && c.y == sy){break;}// ako sme na coordinatite koito tursim, da spe da se tursi oshte
 		}
 
 		this.target.path = true;
