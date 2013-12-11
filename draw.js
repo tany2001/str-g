@@ -6,44 +6,10 @@ colors[3] = "yellow";
 
 var multy = 1, defaultTrrSize2 = 200 / map.size.x ;
 
-var terrainImg=[],i=[];
-for (i[0]=0;i[0]<2;i[0]++){
-	terrainImg[i[0]]=[];
-	for (i[1]=0;i[1]<2;i[1]++){
-		terrainImg[i[0]][i[1]]=[];
-		for (i[2]=0;i[2]<2;i[2]++){	
-			terrainImg[i[0]][i[1]][i[2]]=[];
-			for (i[3]=0;i[3]<2;i[3]++){
-				terrainImg[i[0]][i[1]][i[2]][i[3]]=[];
-				for (i[4]=0;i[4]<2;i[4]++){
-					terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]]=[];
-					for (i[5]=0;i[5]<2;i[5]++){
-						terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]][i[5]]=[];
-						for (i[6]=0;i[6]<2;i[6]++){
-							terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]][i[5]][i[6]]=[];
-							for (i[7]=0;i[7]<2;i[7]++){
-								terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]][i[5]][i[6]][i[7]]=[];
-								for (i[8]=0;i[8]<2;i[8]++){
-									terrainImg[i[0]][i[1]][i[2]][i[3]][i[4]][i[5]][i[6]][i[7]][i[8]]=new Image();
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
-terrainImg[0][0][0][0][0][0][0][0][0].src="terrain/0.png";
-
 function draw()
 {   
-	if(players[currentPlayer].cam != players[currentPlayer].lastCam)
-	{
-		console.log("asd");
-	}
-
 	var sx = players[currentPlayer].cam.x, sy = players[currentPlayer].cam.y;
+	context.fillRect(canvas.width - 200, 0, 200, canvas.height);
 
 	for(var i = sx;i < sx + drawView;i ++)
 	{
@@ -60,32 +26,19 @@ function draw()
 		
 	}
 
-	var sx = players[currentPlayer].lastCam.x, sy = players[currentPlayer].lastCam.y;
-	
-	for(var i = sx;i < sx + drawView;i += multy)
-	{
-		for(var j = sy;j < sy + drawView;j += multy)
-		{
-			context.fillStyle = colors[map.value[i][j]];
-			context.fillRect(i * defaultTrrSize2 + canvas.width - 200, j * defaultTrrSize2, defaultTrrSize2 * multy, defaultTrrSize2 * multy);
-		}
-	}
+	context.putImageData(minimap, canvas.width - 200, 0);
     
 	drawUnitStat();
     
     context.drawImage(endTurn.img, endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y);
     
     drawResourceBar();
-   
+   	
+   	context.lineWidth = 1;
 	context.fillStyle = "white";
-	context.globalAlpha=0.5;
-	context.strokeRect(canvas.width-200+sx*defaultTrrSize2,0+sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
-	context.globalAlpha=1;
+	context.strokeRect(canvas.width-200+sx*defaultTrrSize2, sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
 
-	players[currentPlayer].lastCam = players[currentPlayer].cam;
-	
-	
-	//context.drawImage(terrainImg[0][0][0][0][0][0][0][0][0],100,100,50,50);
+	players[currentPlayer].lastCam = clone(players[currentPlayer].cam);
 	
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
@@ -136,14 +89,14 @@ function drawResourceBar()
     context.fillText(players[currentPlayer].resourses.stone, 340, 28);
 }
 
-function drawMinimap()
+function drawMinimap(sx, sy, fx, fy)
 {
 	context.fillStyle = "black";
+	context.fillRect(canvas.width - 200, 0, 200, 200);
 
-	context.fillRect(canvas.width - 200, 0, 200, canvas.height);
-	for(var i = 0;i < map.size.x;i += multy)
+	for(var i = sx;i < fx;i += multy)
 	{
-		for(var j = 0;j < map.size.y;j += multy)
+		for(var j = sy;j < fy;j += multy)
 		{
 			context.fillStyle = colors[map.value[i][j]];
 			context.fillRect(i * defaultTrrSize2 + canvas.width - 200, j * defaultTrrSize2, defaultTrrSize2 * multy, defaultTrrSize2 * multy);
@@ -151,5 +104,7 @@ function drawMinimap()
 	}
 }
 
+drawMinimap(0, 0, map.size.x, map.size.y);
+var minimap = context.getImageData(canvas.width - 200, 0, 200, 200);
+
 draw();
-drawMinimap();
