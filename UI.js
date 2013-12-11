@@ -79,6 +79,7 @@ function mouse(e)
     	unitReset(currentPlayer);
         currentPlayer ++;
         if(currentPlayer >= players.length){currentPlayer = 0;}
+        players[currentPlayer].selected = new Vector(-1, -1);
     }
 
     //cukane
@@ -109,7 +110,7 @@ function mouse(e)
 		{
 			var selX = players[currentPlayer].selected.x, selY = players[currentPlayer].selected.y, able = true;
 				
-			if(selX != -1 && (cx != selX || cy != selY))
+			if(selX != -1 && (cx != selX || cy != selY) && map.unit[selX][selY].owner == currentPlayer)
 			{
 				map.unit[selX][selY].target.x = cx;
 				map.unit[selX][selY].target.y = cy;

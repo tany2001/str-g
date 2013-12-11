@@ -32,7 +32,7 @@ function draw()
     drawResourceBar();
    	
    	context.putImageData(minimap, canvas.width - 200, 0);
-   	
+
    	context.lineWidth = 1;
 	context.fillStyle = "white";
 	context.strokeRect(canvas.width-200+sx*defaultTrrSize2, sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
@@ -55,6 +55,7 @@ function drawUnitStat()
 	if (players[currentPlayer].selected.x!=-1){
 		var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
 		
+		context.fillText("Unit Owner: " + (map.unit[sx][sy].owner + 1), canvas.width - 200, 240, 200);
 		context.fillText("Health Poins: " + map.unit[sx][sy].hp + "/" + unitStats[map.unit[sx][sy].type].hp,canvas.width - 200, 255, 200);
 		context.fillText("Moves Left: " + map.unit[sx][sy].movesLeft + "/" + map.unit[sx][sy].speed,canvas.width - 200, 270, 200);
 		context.fillText("Damage: " + map.unit[sx][sy].damage,canvas.width - 200, 285, 200);
