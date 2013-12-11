@@ -73,11 +73,11 @@ function Map(){
 }
 
 var map = new Map();
-map.unit[50][51] = new Unit("worker",true);
+map.unit[50][51] = new Unit("worker", true, 0);
 var stack=[];
 var toMove = [];
 
-function Unit(type, isStart)
+function Unit(type, isStart, owner)
 {
 	
 	this.hp = unitStats[type].hp;
@@ -88,6 +88,7 @@ function Unit(type, isStart)
 	this.direction = 0;
 	this.frame = 0;
 	this.frameSize = new Vector (unitStats[type].frameSize.x,unitStats[type].frameSize.y);
+	this.owner = owner;
 
 	this.movesLeft = this.speed;
 
@@ -96,11 +97,13 @@ function Unit(type, isStart)
 
 	this.isStart = isStart;
 
-	this.ways = create2dArray(map.size.x, map.size.y, 0);
+	this.ways = create2dArray(map.size.x, map.size.y, 999999);
 
 	this.setPath = function(sx, sy)
 	{
 		console.log("Generirane na put...");
+
+		this.ways = create2dArray(map.size.x, map.size.y, 999999);
 
 		var next = []; var used = create2dArray(map.size.x, map.size.y, false); // osnovni masivi...
 		next.push(new Vector(this.target.x, this.target.y)); next[0].n = 1; // zadavane na nachalo
@@ -110,7 +113,7 @@ function Unit(type, isStart)
 
 		while(next.length > 0)
 		{
-			var c = clone(next[0]);
+			var c = clone(next[0]); c.n ++;
 			next.remove(0);
 			this.ways[c.x][c.y] = c.n;
  	
@@ -123,13 +126,13 @@ function Unit(type, isStart)
 					used[c2.x][c2.y] = true;
 
 					var p = new Vector(c2.x, c2.y);// pravime promenliva za push-vane
-					p.n = c.n + 1;
+					p.n = c.n;
 
 					next.push(p); // pushvane
 				}
 			}
 
-			//if(c.x == sx && c.y == sy){break;}// ako sme na coordinatite koito tursim, da spe da se tursi oshte
+			if(c.x == sx && c.y == sy){break;}// ako sme na coordinatite koito tursim, da spe da se tursi oshte
 		}
 
 		this.target.path = true;
@@ -147,7 +150,6 @@ Array.prototype.remove = function(from, to)
 function Player(name)
 {
 	this.cam = new Vector(0, 0);
-	this.lastCam = new Vector(0, 0);
 
 	this.resourses = 
 	{

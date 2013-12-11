@@ -42,15 +42,18 @@ function moveUnit()
 			var c2 = clone(c); c2.x += moveX[j];  c2.y += moveY[j]; //c2 - coordinatite na koito shte se gleda dali moje da se premesti
 			var u = map.unit[c.x][c.y];
 
-			if(u.ways[c.x][c.y] > u.ways[c2.x][c2.y])// ako iskam da se premestq na block-che, koeto e po-blizo...
+			if(u.ways[c.x][c.y] > u.ways[c2.x][c2.y] && u.movesLeft > 0)// ako iskam da se premestq na block-che, koeto e po-blizo...
 			{
 				any = true;
 				if(map.unit[c2.x][c2.y] == 0)// i e prazno...
 				{
 					map.unit[c2.x][c2.y] = u;//se mestq!
-					u = 0;
+					map.unit[c.x][c.y] = 0;
+					players[currentPlayer].selected = clone(c2);
 
 					toMove[i].x = c2.x; toMove[i].y = c2.y;
+					u.movesLeft --;
+					break;
 				}
 			}
 		}
@@ -73,6 +76,7 @@ function mouse(e)
 	//endTurn
     if(rectCollision(endTurn.pos.x, endTurn.pos.y, endTurn.size.x, endTurn.size.y, e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop, 0, 0))
     {
+    	unitReset(currentPlayer);
         currentPlayer ++;
         if(currentPlayer >= players.length){currentPlayer = 0;}
     }
@@ -119,6 +123,20 @@ function mouse(e)
 				}
 
 				if(able){toMove.push(new Vector(selX, selY)); map.unit[selX][selY].target.path = false;}
+			}
+		}
+	}
+}
+
+function unitReset(pid)
+{
+	for(var i = 0;i < map.size.x;i ++)
+	{
+		for(var j = 0;j < map.size.y;j ++)
+		{
+			if(map.unit[i][j] != 0 && map.unit[i][j].owner == pid)
+			{
+				map.unit[i][j].movesLeft = map.unit[i][j].speed;
 			}
 		}
 	}

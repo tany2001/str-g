@@ -9,7 +9,6 @@ var multy = 1, defaultTrrSize2 = 200 / map.size.x ;
 function draw()
 {   
 	var sx = players[currentPlayer].cam.x, sy = players[currentPlayer].cam.y;
-	context.fillRect(canvas.width - 200, 0, 200, canvas.height);
 
 	for(var i = sx;i < sx + drawView;i ++)
 	{
@@ -25,8 +24,6 @@ function draw()
 		}
 		
 	}
-
-	context.putImageData(minimap, canvas.width - 200, 0);
     
 	drawUnitStat();
     
@@ -34,11 +31,11 @@ function draw()
     
     drawResourceBar();
    	
+   	context.putImageData(minimap, canvas.width - 200, 0);
+   	
    	context.lineWidth = 1;
 	context.fillStyle = "white";
 	context.strokeRect(canvas.width-200+sx*defaultTrrSize2, sy*defaultTrrSize2,(drawView*defaultTrrSize2),(drawView*defaultTrrSize2));
-
-	players[currentPlayer].lastCam = clone(players[currentPlayer].cam);
 	
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
@@ -48,7 +45,7 @@ function drawUnitStat()
 {
 	context.fillStyle = "black";
 	context.font = "15px Arial";
-	context.fillRect(canvas.width - 200, 200, 200,20);
+	context.fillRect(canvas.width - 200, 0, 200, canvas.height);
 	context.fillStyle = "white";
 	context.fillText("Current player: " + players[currentPlayer].name, canvas.width - 200, 215, 200);
 

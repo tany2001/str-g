@@ -42,14 +42,14 @@ function generateMap(sx, sy, sch, mch, type)
 	}
 }
 
-for(var i = 0;i < 35;i ++)
+for(var i = 0;i < 45;i ++)
 {
 	var sx = Math.floor(Math.random() * map.size.x);
 	var sy = Math.floor(Math.random() * map.size.y);
 	generateMap(sx, sy, 100, 0.005, 1);	
 }
 
-for(var i = 0;i < 28;i ++)
+for(var i = 0;i < 25;i ++)
 {
 	var sx = Math.floor(Math.random() * map.size.x);
 	var sy = Math.floor(Math.random() * map.size.y);
