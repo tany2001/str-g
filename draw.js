@@ -18,7 +18,7 @@ function draw()
             if(map.unit[i][j]!=0 && map.unit[i][j].isStart)
             {
             	var t = map.unit[i][j].type;
-				context.drawImage(unitStats[t].image,map.unit[i][j].frame*map.unit[i][j].frameSize.x,map.unit[i][j].direction*map.unit[i][j].frameSize.y,
+				context.drawImage(unitStats[t].image,map.unit[i][j].direction*map.unit[i][j].frameSize.x,map.unit[i][j].frame*map.unit[i][j].frameSize.y,
 				unitStats[t].frameSize.x,unitStats[t].frameSize.y,(i - sx) * defaultTrrSize, (j - sy) * defaultTrrSize, defaultTrrSize, defaultTrrSize);
 			}
 		}
@@ -40,7 +40,6 @@ function draw()
 	requestAnimationFrame(draw);
 	context.strokeRect(0, 0, canvas.width, canvas.height);
 }
-
 function drawUnitStat()
 {
 	context.fillStyle = "black";
@@ -56,7 +55,7 @@ function drawUnitStat()
 		var sx = players[currentPlayer].selected.x, sy = players[currentPlayer].selected.y;
 		
 		context.fillText("Unit Owner: " + (map.unit[sx][sy].owner + 1), canvas.width - 200, 240, 200);
-		context.fillText("Health Poins: " + map.unit[sx][sy].hp + "/" + unitStats[map.unit[sx][sy].type].hp,canvas.width - 200, 255, 200);
+		context.fillText("Health Points: " + map.unit[sx][sy].hp + "/" + unitStats[map.unit[sx][sy].type].hp,canvas.width - 200, 255, 200);
 		context.fillText("Moves Left: " + map.unit[sx][sy].movesLeft + "/" + map.unit[sx][sy].speed,canvas.width - 200, 270, 200);
 		context.fillText("Damage: " + map.unit[sx][sy].damage,canvas.width - 200, 285, 200);
 		if (unitStats[map.unit[sx][sy].type].cappacity!=0){

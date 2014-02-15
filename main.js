@@ -34,7 +34,7 @@ function create2dArray(sizeX,sizeY,value){
 	return array;
 }
 
-function Stat(hp, damage, speed, cappacity, image , sizeX, sizeY , frameSizeX , frameSizeY){
+function Stat(hp, damage, speed, cappacity, image , sizeX, sizeY , frameSizeX , frameSizeY , frameCount){
 
 	this.hp = hp;
 	this.damage = damage;
@@ -44,9 +44,10 @@ function Stat(hp, damage, speed, cappacity, image , sizeX, sizeY , frameSizeX , 
 	this.image.src = image;
 	this.size = new Vector(sizeX, sizeY);
 	this.frameSize = new Vector(frameSizeX,frameSizeY);
+	this.frameCount = frameCount;
 }
 
-unitStats["worker"] = new Stat(10, 1, 5, 0 , "worker.png" , 1 , 1,43,43);
+unitStats["worker"] = new Stat(10, 1, 50, 0 , "worker.png" , 1 , 1,41,41,5);
 
 unitStats["soldier"] = new Stat(20, 2, 5 ,0 , "soldier.png" , 1 , 1,53,53);
 
@@ -80,10 +81,12 @@ var toMove = [];
 function Unit(type, isStart, owner)
 {
 	
+	this.maxHP = unitStats[type].hp;
 	this.hp = unitStats[type].hp;
 	this.speed = unitStats[type].speed;
 	this.damage = unitStats[type].damage;
 	this.cappacity = unitStats[type].cappacity;
+	this.frameCount = unitStats[type].frameCount;
 	this.type = type;
 	this.direction = 0;
 	this.frame = 0;
@@ -108,8 +111,8 @@ function Unit(type, isStart, owner)
 		var next = []; var used = create2dArray(map.size.x, map.size.y, false); // osnovni masivi...
 		next.push(new Vector(this.target.x, this.target.y)); next[0].n = 1; // zadavane na nachalo
 
-		var moveX = [1, -1, 0, 0]; // oshte osnovni masivi
-		var moveY = [0, 0, 1, -1];
+		var moveX = [0, 1, 0, -1];// oshte osnovni masivi
+		var moveY = [-1, 0, 1, 0];
 
 		while(next.length > 0)
 		{
@@ -121,7 +124,7 @@ function Unit(type, isStart, owner)
 			{
 				var c2 = new Vector(c.x + moveX[i], c.y + moveY[i]);// novata poziciq
 
-				if(c2.x >= 0 && c2.x < map.size.x && c2.y >= 0 && c2.y < map.size.y && !used[c2.x][c2.y])// ako ne barame izvun mapa
+				if(c2.x >= 0 && c2.x < map.size.x && c2.y >= 0 && c2.y < map.size.y && map.value[c2.x][c2.y]==map.value[c.x][c.y] && !used[c2.x][c2.y])// ako ne barame izvun mapa
 				{
 					used[c2.x][c2.y] = true;
 

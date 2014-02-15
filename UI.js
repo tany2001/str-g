@@ -26,13 +26,13 @@ moveCamera();
 
 function moveUnit()
 {
-	var moveX = [1, -1, 0, 0];
-	var moveY = [0, 0, 1, -1];
+	var moveX = [0, 1, 0, -1];
+	var moveY = [-1, 0, 1, 0];
 
 	for(var i = 0;i < toMove.length;i ++)
 	{
 		var c = clone(toMove[i]); //coordinatite na neshtoto za mestene
-		var mu = map.unit[c.x][c.y];//movable unit - neshtot za murdane
+		var mu = map.unit[c.x][c.y];//movable unit - neshtoto za murdane
 		var any = false; //da iztriq li ot toMove
 
 		if(!mu.target.path) {mu.setPath(c.x, c.y);} //ako nqma generiran put, da generira
@@ -42,15 +42,21 @@ function moveUnit()
 			var c2 = clone(c); c2.x += moveX[j];  c2.y += moveY[j]; //c2 - coordinatite na koito shte se gleda dali moje da se premesti
 			var u = map.unit[c.x][c.y];
 
-			if(u.ways[c.x][c.y] > u.ways[c2.x][c2.y] && u.movesLeft > 0)// ako iskam da se premestq na block-che, koeto e po-blizo...
+			if(u.ways[c.x][c.y] > u.ways[c2.x][c2.y] && u.movesLeft > 0 
+											&& map.value[c2.x][c2.y] == map.value[c.x][c.y])// ako iskam da se premestq na block-che, koeto e po-blizo...
 			{
 				any = true;
 				if(map.unit[c2.x][c2.y] == 0)// i e prazno...
 				{
 					map.unit[c2.x][c2.y] = u;//se mestq!
+					map.unit[c2.x][c2.y].frame++;
+					map.unit[c2.x][c2.y].frame%=map.unit[c2.x][c2.y].frameCount;
+					map.unit[c2.x][c2.y].direction = j;
+					
 					map.unit[c.x][c.y] = 0;
-					players[currentPlayer].selected = clone(c2);
-
+					if (players[currentPlayer].selected.x == c.x && players[currentPlayer].selected.y == c.y){
+						players[currentPlayer].selected = clone(c2);
+					}
 					toMove[i].x = c2.x; toMove[i].y = c2.y;
 					u.movesLeft --;
 					break;
@@ -58,7 +64,10 @@ function moveUnit()
 			}
 		}
 
-		if(!any){toMove.remove(i);}
+		if(!any){//ako nqma put 
+			toMove.remove(i);
+			map.unit[c.x][c.y].frame=0;
+		}
 	}
 	setTimeout(moveUnit, 100);
 }
@@ -79,7 +88,7 @@ function mouse(e)
     	unitReset(currentPlayer);
         currentPlayer ++;
         if(currentPlayer >= players.length){currentPlayer = 0;}
-        players[currentPlayer].selected = new Vector(-1, -1);
+        //players[currentPlayer].selected = new Vector(-1, -1);
     }
 
     //cukane
